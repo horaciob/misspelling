@@ -16,12 +16,23 @@ module Misspelling
     end
 
     def show
-      puts "There is some misspelling on " + Rainbow(@file_name).yellow
+      puts '=' * 100
+      puts 'There is some misspelling on ' <<
+           Rainbow(@file_name).underline.yellow <<
+           "\n\n"
+
       @data.each do |value|
-        puts 'Line: ' + Rainbow(value[:line_number]).red
-        puts 'Word: ' + Rainbow(value[:input]).red
-        puts 'Did you want to say? ' + Rainbow(value[:suggestion].join(' or ')).green
+        print 'Line: ' + Rainbow(value[:line_number]).bright.red
+        print " \t Word: " + Rainbow(value[:input]).red
+        print " \t Suggestion "
+
+        value[:suggestion].each_with_index do |word, index|
+          print ' or ' if index > 0
+          print Rainbow(word).green
+        end
+        puts ''
       end
+      puts '=' * 100
     end
   end
 end

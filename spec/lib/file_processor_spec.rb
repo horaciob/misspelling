@@ -20,7 +20,7 @@ RSpec.describe Misspelling::FileProcessor do
       it 'returns errors three errors' do
         allow(File)
           .to receive(:readlines)
-          .and_return(["abandonned aberation","zeebra", "one twoo"])
+          .and_return(['abandonned aberation', 'zeebra', 'one twoo'])
         report = file_processor.process
         expect(report.data.size).to eq 3
       end

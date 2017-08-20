@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require_relative '../lib/misspelling'
-dict = Misspelling::dict.new
-processor = FileProcessor.new(file_name: '/tmp/pepe', dict: dict)
-processor.output.show
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
+require 'misspelling'
+
+cli = Misspelling::Cli.new
+result = 0
+
+exit result
