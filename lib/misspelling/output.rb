@@ -9,29 +9,32 @@ module Misspelling
       @data = []
     end
 
-    def add(line_number:, input:, suggestion:)
+    def add(line_number:, input:, suggestion:, context:nil)
       @data << { line_number: line_number,
                  input: input,
-                 suggestion: suggestion }
+                 suggestion: suggestion,
+                 context: context }
     end
 
     def show
       puts '=' * 100
-      puts 'There is some misspelling on ' <<
+      puts 'There are misspellings on ' <<
            Rainbow(@file_name).underline.yellow <<
            "\n\n"
 
       @data.each do |value|
         print 'Line: ' + Rainbow(value[:line_number]).bright.red
         print " \t Word: " + Rainbow(value[:input]).red
-        print " \t Suggestion "
+        print " \t Suggestions: "
 
         value[:suggestion].each_with_index do |word, index|
           print ' or ' if index > 0
           print Rainbow(word).green
         end
+        print "\t\t Context: #{value[:context]}" if value[:context]
         puts ''
       end
+
       puts '=' * 100
     end
   end

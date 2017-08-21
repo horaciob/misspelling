@@ -1,9 +1,12 @@
 require_relative '../../config/dictionary'
+require 'singleton'
 
 module Misspelling
   # Mannage dictionary, check for typos on a word and gives
   # suggestions
   class Dictionary
+    include Singleton
+
     attr_reader :dict
     def initialize
       @dict = load_dict

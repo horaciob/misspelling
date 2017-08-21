@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Misspelling::Dictionary do
-  subject(:dict) { described_class.new }
+  subject(:dict) { described_class.instance }
 
   describe '#initialize' do
     it 'loads a dictionary' do

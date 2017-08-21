@@ -1,10 +1,10 @@
 module Misspelling
-  class FileProcessor
+  class FileChecker
     attr_reader :output
 
-    def initialize(file_name:, dict:)
+    def initialize(file_name:)
       @file_name = file_name
-      @dict = dict
+      @dict = Misspelling::Dictionary.instance
       @output = Misspelling::Output.new(file_name: file_name)
     end
 
@@ -16,7 +16,8 @@ module Misspelling
           errors.each do |error|
             @output.add(line_number: line_counter,
                         input: error[:input],
-                        suggestion: error[:suggestion])
+                        suggestion: error[:suggestion],
+                        context: error.fetch(:context, nil))
           end
 
           line_counter += 1
@@ -33,7 +34,7 @@ module Misspelling
       words = line.scan(/[a-zA-Z][a-zA-Z0-9]+/)
       words.each do |word|
         suggestion = @dict.check_typo(word)
-        output << { input: word, suggestion: suggestion } if suggestion
+        output << { input: word, suggestion: suggestion, context: line.delete("\n") } if suggestion
       end
 
       output

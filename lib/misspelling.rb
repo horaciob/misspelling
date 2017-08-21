@@ -1,12 +1,11 @@
 require 'rainbow'
-require_relative 'misspelling/version'
-require_relative 'misspelling/dictionary'
-require_relative 'misspelling/output'
-require_relative 'misspelling/file_processor'
+require 'misspelling/version'
+require 'misspelling/dictionary'
+require 'misspelling/output'
+require 'misspelling/file_checker'
 
 module Misspelling
-  dict = Misspelling::Dictionary.new
-  processor = FileProcessor.new(file_name: '/tmp/pepe', dict: dict)
+  processor = FileChecker.new(file_name: '/tmp/pepe')
   processor.process
   processor.output.show
 end
