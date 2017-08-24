@@ -1,0 +1,50 @@
+Files:
+  Include:
+    - '**/*.rb'
+    - '**/*.slim'
+    - '**/*.haml'
+    - '**/*.erb'
+    - '**/*.yml'
+    - '**/*.erb '
+    - '**/*.rhtml '
+    - '**/*.erubis'
+    - '**/*.builder'
+    - '**/*.nokogiri'
+    - '**/*.sass'
+    - '**/*.scss'
+    - '**/*.less'
+    - '**/*.liquid'
+    - '**/*.markdown'
+    - '**/*.mkd'
+    - '**/*.md'
+    - '**/*.textile'
+    - '**/*.rdoc'
+    - '**/*.asciidoc '
+    - '**/*.adoc '
+    - '**/*.ad'
+    - '**/*.radius'
+    - '**/*.mab'
+    - '**/*.rabl'
+    - '**/*.slim'
+    - '**/*.creole'
+    - '**/*.mediawiki'
+    - '**/*.mw'
+    - '**/*.coffee'
+    - '**/*.styl'
+    - '**/*.yajl'
+    - '**/*.wlang'
+
+  Exclude:
+    - '**/*.log'
+
+Words:
+  Include:
+    - typo: tuest
+      suggestion: test
+
+  Exclude:
+    - 'zeebra'
+
+
+
+

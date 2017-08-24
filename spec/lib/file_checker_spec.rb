@@ -9,9 +9,8 @@ RSpec.describe Misspelling::FileChecker do
   describe '#process' do
     context 'on success' do
       it 'open given file' do
-        expect(File).to receive(:readlines)
-          .with('fake_file')
-          .and_return([])
+        expect(File).to receive(:readlines).with('fake_file')
+                                           .and_return([])
 
         file_checker.process
       end
@@ -34,7 +33,7 @@ RSpec.describe Misspelling::FileChecker do
                       context: 'abandonned zeebra' },
                     { input: 'zeebra',
                       suggestion: ['zebra'],
-                      context: 'abandonned zeebra' } ]
+                      context: 'abandonned zeebra' }]
         end
       end
     end

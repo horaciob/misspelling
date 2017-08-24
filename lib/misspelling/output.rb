@@ -9,7 +9,7 @@ module Misspelling
       @data = []
     end
 
-    def add(line_number:, input:, suggestion:, context:nil)
+    def add(line_number:, input:, suggestion:, context: nil)
       @data << { line_number: line_number,
                  input: input,
                  suggestion: suggestion,
@@ -17,6 +17,7 @@ module Misspelling
     end
 
     def show
+      return if @data.empty?
       puts '=' * 100
       puts 'There are misspellings on ' <<
            Rainbow(@file_name).underline.yellow <<
