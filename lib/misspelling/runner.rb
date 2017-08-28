@@ -1,4 +1,5 @@
 require 'yaml'
+
 module Misspelling
   class Runner
     class RunnerError < StandardError; end
@@ -8,12 +9,24 @@ module Misspelling
       @outputs = []
     end
 
+    def start
+      file_list.each do |file|
+        checker = FileChecker.new(file_name: file)
+        checker.process
+
+        @outputs << checker.output
+      end
+    end
+
     def file_list
+      files = []
       @config.file_filters.map do |filter|
         Dir.glob(filter).each do |file|
-          @outputs << FileChecker.new(file_name: file).output
+          files << file
         end
       end
+
+      files
     end
 
     def show_result

@@ -18,22 +18,22 @@ module Misspelling
 
     def show
       return if @data.empty?
-      puts '=' * 100
       puts 'There are misspellings on ' <<
            Rainbow(@file_name).underline.yellow <<
            "\n\n"
 
       @data.each do |value|
-        print 'Line: ' + Rainbow(value[:line_number]).bright.red
-        print " \t Word: " + Rainbow(value[:input]).red
-        print " \t Suggestions: "
+        suggest = ''
+        print 'Line: ' + Rainbow(value[:line_number].to_s.ljust(6)).bright.red
+        print " Word: " + Rainbow(value[:input].ljust(20)).red
+        print " Suggestions: "
 
         value[:suggestion].each_with_index do |word, index|
-          print ' or ' if index > 0
-          print Rainbow(word).green
+          suggest << ' or ' if index > 0
+          suggest << Rainbow(word).green
         end
-        print "\t\t Context: #{value[:context]}" if value[:context]
-        puts ''
+        print suggest.ljust(40)
+        print "\n"
       end
 
       puts '=' * 100
