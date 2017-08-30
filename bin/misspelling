@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-require 'byebug'
-
 $LOAD_PATH.unshift("#{__dir__}/../lib")
 
 require 'misspelling'
+require 'benchmark'
 
-runner = Misspelling::Runner.new(options:'la')
-runner.start
-runner.show_result
+cli = Misspelling::Cli.new
 
+time = Benchmark.realtime do
+  cli.run
+end
+
+puts "Finished in %.4f seconds" % time
