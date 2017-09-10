@@ -19,12 +19,12 @@ module Misspelling
 
     def included_files
       patterns = @params['Files']['Include'] | @options.fetch(:include_patterns, [])
-      Dir.glob(patterns).map{|b| File.expand_path(b)}.uniq
+      Dir.glob(patterns).map { |b| File.expand_path(b) }.uniq
     end
 
     def excluded_files
       patterns = @params['Files']['Exclude'] | @options.fetch(:exclude_patterns, [])
-      Dir.glob(patterns).map{|b| File.expand_path(b)}.uniq
+      Dir.glob(patterns).map { |b| File.expand_path(b) }.uniq
     end
 
     def file_list
