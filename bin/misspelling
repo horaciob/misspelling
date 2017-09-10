@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
+
 $LOAD_PATH.unshift("#{__dir__}/../lib")
 
 require 'misspelling'
@@ -11,4 +12,4 @@ time = Benchmark.realtime do
   cli.run
 end
 
-puts "Finished in %.4f seconds" % time
+puts format('Finished in %.4f seconds', time)

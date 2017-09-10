@@ -4,3 +4,6 @@ AllCops:
   RSpec:
     Patterns:
     - '_spec.rb$'
+
+Documentation:
+    Enabled: false

@@ -25,8 +25,8 @@ module Misspelling
       @data.each do |value|
         suggest = ''
         print 'Line: ' + Rainbow(value[:line_number].to_s.ljust(6)).bright.red
-        print " Word: " + Rainbow(value[:input].ljust(20)).red
-        print " Suggestions: "
+        print ' Word: ' + Rainbow(value[:input].ljust(20)).red
+        print ' Suggestions: '
 
         value[:suggestion].each_with_index do |word, index|
           suggest << ' or ' if index > 0

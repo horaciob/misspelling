@@ -1,5 +1,6 @@
 require 'rainbow'
 require 'misspelling/cli'
+require 'misspelling/options'
 require 'misspelling/runner'
 require 'misspelling/version'
 require 'misspelling/config'
