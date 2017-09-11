@@ -13,7 +13,7 @@ RSpec.describe Misspelling::Runner do
     it 'call FileChecker for every included files' do
       checker = double
       allow(@config).to receive(:file_list)
-        .and_return %w(fake_file1 fake_file2)
+        .and_return %w[fake_file1 fake_file2]
 
       allow(checker).to receive(:process)
       allow(checker).to receive(:output).and_return('something')
@@ -27,7 +27,7 @@ RSpec.describe Misspelling::Runner do
     it 'calls FileChecker process' do
       checker = double
       allow(@config).to receive(:file_list)
-        .and_return %w(fake_file1 fake_file2)
+        .and_return %w[fake_file1 fake_file2]
 
       allow(checker).to receive(:output).and_return('something')
       allow(Misspelling::FileChecker).to receive(:new)
@@ -41,7 +41,7 @@ RSpec.describe Misspelling::Runner do
     it 'call FileChecker output' do
       checker = double
       allow(@config).to receive(:file_list)
-        .and_return %w(fake_file1 fake_file2)
+        .and_return %w[fake_file1 fake_file2]
 
       allow(checker).to receive(:process)
       allow(Misspelling::FileChecker).to receive(:new)
@@ -52,15 +52,15 @@ RSpec.describe Misspelling::Runner do
       runner.start
     end
   end
-  
-  describe '#show_result' do 
-    it 'calls show for every output' do 
+
+  describe '#show_result' do
+    it 'calls show for every output' do
       one = instance_double(Misspelling::Output)
       two = instance_double(Misspelling::Output)
-      runner.instance_variable_set(:@outputs, [one,two])
+      runner.instance_variable_set(:@outputs, [one, two])
 
-      expect(one).to receive(:show) 
-      expect(two).to receive(:show) 
+      expect(one).to receive(:show)
+      expect(two).to receive(:show)
 
       runner.show_result
     end
