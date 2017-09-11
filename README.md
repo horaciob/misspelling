@@ -22,6 +22,7 @@ Or install it yourself as:
 
 example.rb [options]
 
+```ruby
 Specific options:
     -i pattern1,pattern2,..patternN, Included pattern will be added to paths
         --include
@@ -31,7 +32,7 @@ Note that --exclude patterns take priority over --include patterns
     -c, --config_file file           Specify configuration file. By default will look for .misspelling.yml
     -h, --help                       Show this message
         --version                    Show version
-
+```
 or you can add a config file (.misspelling.yml by default) with this [format](https://github.com/horaciob/misspelling/blob/master/config/misspelling.yml)
 
 ## Contributing
