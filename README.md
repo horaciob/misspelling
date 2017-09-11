@@ -1,3 +1,5 @@
+<a href="https://codeclimate.com/github/horaciob/misspelling"><img src="https://codeclimate.com/github/horaciob/misspelling/badges/gpa.svg" /></a>
+<a href="https://codeclimate.com/github/horaciob/misspelling"><img src="https://codeclimate.com/github/horaciob/misspelling/badges/issue_count.svg" /></a>
 
 # Misspelling
 It helps to find misspellings based on https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
