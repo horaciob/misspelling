@@ -1,36 +1,87 @@
 require 'spec_helper'
 
 RSpec.describe Misspelling::Config do
-  subject(:config) { described_class.new }
+  subject(:config) { described_class.new(options: {}) }
+
+  describe '#included_files' do 
+    it 'return a mix of default and given files' do 
+      list = config.send(:default_params)['Files']['Include'] + ['fake2.rb']
+      config.instance_variable_set(:@options, { include_patterns:['fake2.rb']})
+
+      expect(Dir).to receive(:glob).with(array_including(list)).and_return([]) 
+      
+      config.included_files
+    end
+  end
+  
+  describe '#excluded_files' do 
+    it 'return a mix of default and given files' do 
+      config.instance_variable_set(:@options, { exclude_patterns:['fake2.rb']})
+
+      expect(Dir).to receive(:glob).with(["**/*.log", "fake2.rb"]).and_return([]) 
+      
+      config.excluded_files
+    end
+  end
+
+  describe '#file_list' do 
+    it 'returns a list of included files without excluded' do 
+      allow(config).to receive(:included_files).and_return(%w{a b c d})
+      allow(config).to receive(:excluded_files).and_return(%w{a c})
+
+      expect(config.file_list).to contain_exactly('b', 'd')
+    end
+  end
 
   describe '#load_file' do
     context 'given a config file' do
-      before do
-        allow(File).to receive(:exist?)
-          .and_return(true)
-      end
+      context 'when a different file is given' do
+        subject(:config) do
+          described_class.new(options: { config_file: '/my/fake/file.yml' })
+        end
 
-      it 'loads a file' do
-        expect(YAML).to receive(:load_file)
-          .with('/my/fake/file.yml')
-          .and_return('')
+        it 'loads a file' do
+          allow(File).to receive(:exist?)
+            .with('/my/fake/file.yml')
+            .and_return(true)
 
-        config.load_file(file_name: '/my/fake/file.yml')
+          expect(YAML).to receive(:load_file)
+            .with('/my/fake/file.yml')
+            .and_return('')
+
+          config.send :load_file
+        end
+
+        it 'raise error if not exist' do
+          allow(File).to receive(:exist?)
+            .with('/my/fake/file.yml')
+            .and_return(false)
+
+          expect { config.send(:load_file)}
+            .to raise_error Misspelling::Config::ConfigError
+        end
       end
     end
 
     context 'when no special file are give' do
-      before do
-        allow(File).to receive(:exist?)
-          .and_return(true)
-      end
 
       it 'looks for .misspeling.yml file' do
+        allow(File).to receive(:exist?)
+          .with('.misspelling.yml')
+          .and_return(true)
+
         expect(YAML).to receive(:load_file)
           .with('.misspelling.yml')
           .and_return('')
 
-        config.load_file
+        config.send :load_file
+      end
+
+      it 'returns empty hash if .misspelling does not exists' do
+        allow(File).to receive(:exist?)
+          .with('.misspelling.yml')
+          .and_return(false)
+        expect(config.send(:load_file)).to be {}
       end
     end
   end

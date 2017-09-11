@@ -7,14 +7,7 @@ module Misspelling
     def initialize(options:)
       @options = options
       @params = default_params
-      @params.merge(load_file(file_name: options.fetch(:config_file,
-                                                       '.misspelling.yml')))
-    end
-
-    def file_filters
-      return @files unless @files.nil?
-      @files = @params['Files']['Include'] - @params['Files']['Exclude']
-      @files
+      @params['config_file'] = options.fetch(:config_file, '.misspelling.yml')
     end
 
     def included_files
@@ -67,8 +60,9 @@ module Misspelling
                      'Exclude' => ['zeebra'] } }
     end
 
-    def load_file(file_name:)
-      if file_name != '.misspelling.yml' && File.exist?(file_name)
+    def load_file
+      file_name = @params['config_file']
+      if file_name != '.misspelling.yml' && !File.exist?(file_name)
         raise ConfigError, "Could not find #{file_name}"
       end
 
