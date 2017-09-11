@@ -2,7 +2,7 @@
 <a href="https://codeclimate.com/github/horaciob/misspelling"><img src="https://codeclimate.com/github/horaciob/misspelling/badges/issue_count.svg" /></a>
 
 # Misspelling
-It helps to find misspellings based on https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
+It helps to find misspellings based on the [lists of common misspellings for engish](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines)
 
 ## Installation
 
