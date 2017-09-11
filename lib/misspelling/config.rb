@@ -6,8 +6,8 @@ module Misspelling
 
     def initialize(options:)
       @options = options
-      @params = default_params
-      @params['config_file'] = options.fetch(:config_file, '.misspelling.yml')
+      @file_name = options.fetch(:config_file, '.misspelling.yml')
+      @params = base_params
     end
 
     def included_files
@@ -27,6 +27,10 @@ module Misspelling
     end
 
     private
+
+    def base_params
+      default_params.merge(load_file)
+    end
 
     def default_params
       { 'Files' =>
@@ -61,15 +65,14 @@ module Misspelling
     end
 
     def load_file
-      file_name = @params['config_file']
-      if file_name != '.misspelling.yml' && !File.exist?(file_name)
-        raise ConfigError, "Could not find #{file_name}"
+      if @file_name != '.misspelling.yml' && !File.exist?(@file_name)
+        raise ConfigError, "Could not find #{@file_name}"
       end
 
-      return {} unless File.exist?(file_name)
+      return {} unless File.exist?(@file_name)
 
       begin
-        config = YAML.load_file(file_name)
+        config = YAML.load_file(@file_name)
       rescue Psych::SyntaxError => error
         puts error.message
         raise ConfigError, error.message
