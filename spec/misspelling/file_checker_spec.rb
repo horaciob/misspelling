@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-require 'byebug'
 RSpec.describe Misspelling::FileChecker do
   subject(:file_checker) do
     described_class.new(file_name: 'fake_file')
